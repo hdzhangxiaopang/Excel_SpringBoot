@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <script type="text/javascript" th:inline="javascript">
+        var global_ctxPath = /*[[@{/}]]*/ '';
+    </script>
+    <script type="text/javascript" th:src="@{/static/scripts/plugin/jquery-3.2.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/scripts/global.js}"></script>
+    <script>
+        $(function () {
+            $('#downloadExcel').click(function(){
+                location.href=global.getContextPath()+'/apiExport';
+            });
+        });
+    </script>
+</head>
+<body>
+<div>
+    <button id="downloadExcel">下载ApiExcel</button>
+</div>
+</body>
+</html>

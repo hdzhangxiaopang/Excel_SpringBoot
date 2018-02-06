@@ -1,0 +1,42 @@
+#Server 配置
+server:
+ port: 8888
+ connection-timeout: 30000
+ tomcat:
+  uri-encoding: utf-8
+  max-connections: 600 #给定时间接受和处理的最大连接数
+  max-threads: 600     #表示最多同时处理n个连接
+  min-spare-threads: 50  #初始化时创建的线程数
+  accept-count: 700      #当同时连接的人数达到maxThreads时,还可以排队,队列大小为n.超过n就不处理
+ context-path: /excel
+ session:
+   timeout: 1800
+   cookie:
+     http-only: true
+spring:
+ mvc:
+  static-path-pattern: /static/**
+  dispatch-options-request: true
+  dispatch-trace-request: true
+  throw-exception-if-no-handler-found: true
+  log-resolved-exception: false
+  async:
+   request-timeout: 10000
+ resources:
+  add-mappings: true
+  chain:
+   cache: true
+   enabled: true
+   gzipped: true
+  static-locations: classpath:/static/
+ thymeleaf:
+  enabled: true
+  mode: HTML5
+  encoding: UTF-8
+  content-type: text/html
+  cache: true
+  check-template: true
+  check-template-location: true
+  prefix: classpath:/templates/
+  suffix: .html
+  template-resolver-order: 1
