@@ -1,0 +1,46 @@
+package com.company.entity;
+
+import com.company.base.constants.UtilConstants;
+import com.company.entity.ExportResult;
+import com.company.entity.ExportType;
+import com.company.exception.FileExportException;
+
+import java.io.IOException;
+import java.io.OutputStream;
+
+/**
+ * Created by zhangguilin on 1/31/2018.
+ */
+public class ExportCSVResult extends ExportResult {
+
+    private String result;
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    @Override
+    public Object getResult() {
+        return result;
+    }
+
+
+    @Override
+    public ExportType getExportType() {
+        return ExportType.CSV;
+    }
+
+    @Override
+    public void export(OutputStream outputStream) throws FileExportException {
+        try {
+            /**
+             * 解决中文乱码
+             * */
+            outputStream.write(new byte[]{(byte) 0xEF, (byte) 0xBB, (byte) 0xBF});
+            outputStream.write(result.getBytes("UTF-8"));
+            outputStream.close();
+        } catch (IOException e) {
+            throw new FileExportException(UtilConstants.EXPORT_CSV_FILE_ERROR + e);
+        }
+    }
+}
